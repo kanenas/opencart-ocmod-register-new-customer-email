@@ -1,2 +1,3 @@
-# opencart-ocmod-register-new-customer-email
-[OCMOD] Register new customer email (add custom fields)
+# [OCMOD] Register new customer email (add custom fields)
+
+**Opencart**: v3.0.3.8  
