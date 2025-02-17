@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+	<modification>
+	<id><![CDATA[[OCMOD] Register new customer email]]></id>
+	<name><![CDATA[Register new customer email]]></name>
+	<code>knns-register-new-customer-email</code>
+	<version>0.1.0</version>
+	<author><![CDATA[<font color="#7F458C"><b>kanenas.net (aka Nikolas Branis)</b></font> - nbran@kanenas.net]]></author>
+	<link>https://kanenas.net/</link>
+	<file path="catalog/controller/mail/register.php" error="log">
+		<operation error="skip">
+			<search><![CDATA[$data['text_telephone'] = $this->language->get('text_telephone');]]></search>
+			<add position="after"><![CDATA[
+			// kanenas: knns-register-new-customer-email (start) <<
+			//$this->log->write($args);
+			$data['text_company_name']      = $this->language->get('text_company_name');
+			$data['text_vat_id']            = $this->language->get('text_vat_id');
+			$data['text_tax_office']        = $this->language->get('text_tax_office');
+			$data['text_business_activity'] = $this->language->get('text_business_activity');
+			// kanenas: knns-register-new-customer-email (end) <<
+			]]></add>
+		</operation>
+		<operation error="skip">
+			<search><![CDATA[$data['telephone'] = $args[0]['telephone'];]]></search>
+			<add position="after"><![CDATA[
+			// kanenas: knns-register-new-customer-email (start) <<
+			$data['company_name']      = $args[0]['custom_field']['account'][2];
+			$data['vat_id']            = $args[0]['custom_field']['account'][1];
+			$data['tax_office']        = $args[0]['custom_field']['account'][3];
+			$data['business_activity'] = $args[0]['custom_field']['account'][4];
+			// kanenas: knns-register-new-customer-email (end) <<
+			]]></add>
+		</operation>
+	</file>
+	<file path="catalog/language/el-gr/mail/register.php" error="log">
+		<operation error="skip">
+			<search><![CDATA[// Text]]></search>
+			<add position="after"><![CDATA[
+// kanenas: knns-register-new-customer-email (start) <<
+$_['text_company_name']      = 'Επωνυμία:';
+$_['text_vat_id']            = 'Α.Φ.Μ:';
+$_['text_tax_office']        = 'Δ.Ο.Υ:';
+$_['text_business_activity'] = 'Δραστηριότητα:';
+// kanenas: knns-register-new-customer-email (end) <<
+			]]></add>
+		</operation>
+		<operation error="skip">
+			<search><![CDATA[$_['text_new_customer']   = 'Νέος πελάτης';]]></search>
+			<add position="replace"><![CDATA[$_['text_new_customer']   = 'Νέα εγγραφή δυνητικού πελάτη στο TEFACO Β2Β';]]></add>
+		</operation>
+	</file>
+	<file path="catalog/language/en-gb/mail/register.php" error="log">
+		<operation error="skip">
+			<search><![CDATA[// Text]]></search>
+			<add position="after"><![CDATA[
+// kanenas: knns-register-new-customer-email (start) <<
+$_['text_company_name']      = 'Company Name:';
+$_['text_vat_id']            = 'VAT ID:';
+$_['text_tax_office']        = 'Tax Office:';
+$_['text_business_activity'] = 'Business Activity:';
+// kanenas: knns-register-new-customer-email (end) <<
+			]]></add>
+		</operation>
+		<operation error="skip">
+			<search><![CDATA[$_['text_new_customer']   = 'New customer';]]></search>
+			<add position="replace"><![CDATA[$_['text_new_customer']   = 'New lead registration in TEFACO B2B';]]></add>
+		</operation>
+	</file>
+	<file path="catalog/view/theme/default/template/mail/register_alert.twig" error="log">
+		<operation error="skip">
+			<search><![CDATA[{{ text_telephone }} {{ telephone }}]]></search>
+			<add position="after"><![CDATA[{{ text_company_name }} {{ company_name }}
+{{ text_vat_id }} {{ vat_id }}
+{{ text_tax_office }} {{ tax_office }}
+{{ text_business_activity }} {{ business_activity }}
+			]]></add>
+		</operation>
+	</file>
+</modification>
